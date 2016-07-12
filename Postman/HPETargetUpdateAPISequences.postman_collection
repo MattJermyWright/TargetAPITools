@@ -1,0 +1,73 @@
+{
+	"variables": [],
+	"info": {
+		"name": "HPE Target Update Sequence",
+		"_postman_id": "d5c6e918-e44f-7286-4fa1-417c26480fb5",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Initialize the 3rd Party ID Profile for Real-Time API Updates",
+			"request": {
+				"url": "http://hpe.tt.omtrdc.net/rest/v1/mbox?client=hpe",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"mbox\" : \"updateTargetVisitorID\",  \n  \"thirdPartyId\" : \"67115390377491151800910618665937890450\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "2. Get Profile - 3rd Party ID - verify that it exists",
+			"request": {
+				"url": "http://hpe.tt.omtrdc.net/rest/v1/profiles/thirdPartyId/67115390377491151800910618665937890450?client=hpe",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "3. Send Update of 3rd Party Attributes",
+			"request": {
+				"url": "http://hpe.tt.omtrdc.net/m2/hpe/profile/update?mbox3rdPartyId=67115390377491151800910618665937890450&profile.campaign=Q32016Pilot&profile.offerAttribute1=Servers",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "4. Get Profile - 3rd Party ID - verify that updates occur",
+			"request": {
+				"url": "http://hpe.tt.omtrdc.net/rest/v1/profiles/thirdPartyId/67115390377491151800910618665937890450?client=hpe",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
